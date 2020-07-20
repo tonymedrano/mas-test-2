@@ -1,27 +1,29 @@
-// lib/app.ts
-import express = require("express");
-import path from "path";
+const path = require('path')
+const express = require('express')
+const jsonServer = require('json-server')
+const demodata = require('./db.json')
+const middlewares = jsonServer.defaults()
 
-import data from "./data/phones.json";
+const router = jsonServer.router(demodata) // Express router
+const server = jsonServer.create()       // Express server
 
-// Create a new express application instance
-const app: express.Application = express();
+server.use(middlewares)
+server.use('/api/v1', router)
 
-app.use('/images/phones', express.static(__dirname + '/phones'));
+server.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use(function(req, res, next) {
+server.use(jsonServer.bodyParser);
+
+// Avoid CORS issue
+
+server.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Total-Count");
   next();
+ 
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+server.use(router)
 
-app.get("/phones", function(req, res) {
-  res.send(data);
-});
+server.listen(3000)
 
-app.listen(8081, function() {
-  console.log("Example app listening on port 8081!");
-});
