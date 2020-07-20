@@ -1,4 +1,4 @@
-# mas-test-2 project (uncomplete)
+# mas-test-2 project
 
 🙂 **mas-test-app (Forntend):**
 
