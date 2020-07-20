@@ -1,0 +1,21 @@
+.phoneDetailsPage .markdown img {
+    max-width: 100%;
+}
+
+.phoneDetailsPage .markdown pre {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 2px;
+    background-color: #f9f9f9;
+    overflow-x: auto;
+}
+
+.phoneDetailsPage .markdown p > code {
+    padding: 3px 5px;
+    border-radius: 2px;
+    background-color: #f7f7f7;
+}
+
+.phone-detail__name {
+    font-weight: bold;
+}
